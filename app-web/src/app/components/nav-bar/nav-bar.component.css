@@ -1,0 +1,9 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+header>p {
+    font-size: 36px;
+}
