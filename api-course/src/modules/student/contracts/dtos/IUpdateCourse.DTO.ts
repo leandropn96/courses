@@ -1,4 +1,4 @@
 export class IUpdateStudentDTO {
-    codigo: number
-    nome: string
+    code: number
+    name: string
 }

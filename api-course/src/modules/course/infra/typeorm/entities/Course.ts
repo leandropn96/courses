@@ -1,14 +1,11 @@
-import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from 'src/shared/infra/typeorm/BaseEntity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity({ name: 'curso' })
-export class Course {
-    @PrimaryGeneratedColumn({ type: 'integer' })
-    codigo: number;
-
+@Entity({ schema: "courses", name: 'courses' })
+export class Course extends BaseEntity {
     @Column({ type: "character varying", length: 50 })
-    descricao: string;
+    description: string;
 
     @Column({ type: 'text' })
-    ementa: string;
-
+    menu: string;
 }

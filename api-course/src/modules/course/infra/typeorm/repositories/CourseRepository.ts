@@ -12,9 +12,8 @@ class CourseRepository implements ICourseRepository {
         this.ormRepository = manager.getRepository(Course);
     }
 
-    public async create({ descricao, ementa }: ICreateCourseDTO): Promise<Course> {
-        console.log("chegou onde não deveria")
-        const course = this.ormRepository.create({ descricao, ementa })
+    public async create({ description, menu }: ICreateCourseDTO): Promise<Course> {
+        const course = this.ormRepository.create({ description, menu })
         return await this.ormRepository.save(course);
     }
 
@@ -22,20 +21,20 @@ class CourseRepository implements ICourseRepository {
         return await this.ormRepository.find()
     }
 
-    public async show(codigo: number): Promise<Course> {
-        return await this.ormRepository.findOneBy({ codigo })
+    public async show(code: number): Promise<Course> {
+        return await this.ormRepository.findOneBy({ code })
     }
 
-    public async update({ codigo, descricao, ementa }: IUpdateCourseDTO): Promise<boolean> {
+    public async update({ code, description, menu }: IUpdateCourseDTO): Promise<boolean> {
         const updated = await this.ormRepository.update(
-            { codigo },
-            { descricao, ementa }
+            { code },
+            { description, menu }
         )
         return updated.affected >= 1
     }
 
-    public async delete(codigo: number): Promise<boolean> {
-        const deleted = await this.ormRepository.delete(codigo)
+    public async delete(code: number): Promise<boolean> {
+        const deleted = await this.ormRepository.delete(code)
         return deleted.affected >= 1
     }
 }

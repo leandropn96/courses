@@ -6,7 +6,7 @@ import { CreateStudentUseCases } from '../../useCases/createStudent/createStuden
 import { UpdateStudentsUseCase } from "../../useCases/updateStudent/updateStudentUseCase";
 import { ShowStudentUseCase } from "../../useCases/showStudent/showStudentUseCase"
 import { IUpdateStudentDTO } from "../../contracts/dtos/IUpdateCourse.DTO";
-import { Aluno } from "../typeorm/entities/Aluno";
+import { Student } from "../typeorm/entities/Student";
 
 @Controller('students')
 export class StudentController {
@@ -25,7 +25,7 @@ export class StudentController {
     }
 
     @MessagePattern('list-student')
-    public async listStudent(): Promise<Aluno[]> {
+    public async listStudent(): Promise<Student[]> {
         console.log("bateu aqui")
         const student = await this.listStudentsUseCases.execute()
         console.log(student)
@@ -40,6 +40,7 @@ export class StudentController {
 
     @MessagePattern('update-student')
     public async updateCourse(@Payload('message') message: IUpdateStudentDTO) {
+        console.log(message)
         const cursos = await this.updateStudentsUseCase.execute(message)
         return cursos
     }

@@ -1,8 +1,6 @@
 import { EntityManager, EntityRepository, Repository } from 'typeorm';
-import { Course } from '../entities/Course';
-import { ICreateCourseDTO } from 'src/modules/course/contracts/dtos/ICreateCourse.DTO';
 import { IStudentsCourseRepository } from 'src/modules/course/contracts/repositories/IStudentsCourseRepository';
-import { StudentsCourse } from '../entities/CursoAluno';
+import { StudentsCourse } from '../entities/CourseStudents';
 import { ICreateStudentCourseDTO } from 'src/modules/course/contracts/dtos/ICreateStudentCourse.DTO';
 
 @EntityRepository(StudentsCourse)
@@ -13,22 +11,21 @@ class StudentCourseRepository implements IStudentsCourseRepository {
         this.ormRepository = manager.getRepository(StudentsCourse);
     }
 
-    public async create({ codigo_aluno, codigo_curso }: ICreateStudentCourseDTO): Promise<StudentsCourse> {
-        console.log(codigo_aluno, codigo_curso, "bateu onde quero")
-        const course = this.ormRepository.create({ codigo_aluno, codigo_curso })
+    public async create({ code_student, code_course }: ICreateStudentCourseDTO): Promise<StudentsCourse> {
+        const course = this.ormRepository.create({ code_student, code_course })
         return await this.ormRepository.save(course);
     }
 
-    public async list(codigo_curso: number, nome: string): Promise<StudentsCourse[]> {
-        const query = this.ormRepository.createQueryBuilder('aluno_curso')
-            .leftJoinAndSelect('aluno_curso.aluno', 'student')
-            .leftJoinAndSelect('aluno_curso.course', 'course')
+    public async list(code_course: number, name: string): Promise<StudentsCourse[]> {
+        const query = this.ormRepository.createQueryBuilder('course_students')
+            .leftJoinAndSelect('course_students.student', 'student')
+            .leftJoinAndSelect('course_students.course', 'course')
             .where(
-                '(aluno_curso.codigo_curso = :codigo_curso)', { codigo_curso },
+                '(course_students.code_course = :code_course)', { code_course },
             )
-        if (nome) {
+        if (name) {
             query.andWhere(
-                '(student.nome LIKE :nome)', { nome: `%${nome}%` },
+                '(student.name LIKE :name)', { name: `%${name}%` },
             );
         }
         return await query.getMany()

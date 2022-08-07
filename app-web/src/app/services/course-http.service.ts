@@ -15,7 +15,7 @@ export class CourseHttpService {
   ) { }
 
   create(data: CreateCourse) {
-    this.http.post<Course>('http://localhost:3000/courses', data);
+    this.http.post<Course>('http://localhost:3000/courses', data).subscribe()
   }
 
   list() {
@@ -24,20 +24,19 @@ export class CourseHttpService {
 
   }
 
-  update({ codigo, descricao, ementa }: Course): Observable<boolean> {
-    return this.http.put<boolean>(`http://localhost:3000/courses/${codigo}`, { descricao, ementa });
+  update({ code, description, menu }: Course) {
+    this.http.put<boolean>(`http://localhost:3000/courses/${code}`, { description, menu }).subscribe();
   }
 
-  delete(codigo: number): Observable<boolean> {
-    return this.http.delete<boolean>(`http://localhost:3000/courses/${codigo}`);
+  delete(code: number): Observable<boolean> {
+    return this.http.delete<boolean>(`http://localhost:3000/courses/${code}`);
   }
 
   addStudentCourse(data: CreateStudentCourse) {
-    this.http.post<void>('http://localhost:3000/courses/add/student', data);
+    this.http.post('http://localhost:3000/courses/add/student', data).subscribe()
   }
 
-  listStudentCourse(codigo_curso: number, nome?: string) {
-    const res = this.http.get<ListStudentCourse[]>(`http://localhost:3000/courses/${codigo_curso}/list/student?nome=${nome}`);
-    res.subscribe((data) => { this.course_students = data })
+  listStudentCourse(code_course: number, name?: string) {
+    return this.http.get<ListStudentCourse[]>(`http://localhost:3000/courses/${code_course}/list/student?nome=${name}`);
   }
 }

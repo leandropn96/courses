@@ -18,7 +18,7 @@ export class CourseController {
                 brokers: ['localhost:9093']
             },
             consumer: {
-                groupId: 'students'
+                groupId: 'courses'
             },
             producer: {
                 createPartitioner: Partitioners.LegacyPartitioner
@@ -38,7 +38,7 @@ export class CourseController {
     createCurse(@Body() data: ICreateCourse) {
         this.client.send('create-course', {
             message: data
-        })
+        }).subscribe()
     }
 
     @Get()
@@ -48,48 +48,50 @@ export class CourseController {
         })
     }
 
-    @Get(':codigo')
-    show(@Param('codigo') codigo: string): Observable<Course> {
+    @Get(':code')
+    show(@Param('code') code: string): Observable<Course> {
         return this.client.send<Course>('show-course', {
-            message: Number(codigo)
+            message: Number(code)
         })
     }
 
-    @Put(':codigo')
+    @Put(':code')
     update(
-        @Param('codigo') codigo: string,
+        @Param('code') code: string,
         @Body() data: ICreateCourse
     ) {
         this.client.send('update-course', {
-            message: { ...data, codigo: Number(codigo) }
-        })
+            message: { ...data, code: Number(code) }
+        }).subscribe()
     }
 
-    @Delete(':codigo')
+    @Delete(':code')
     delete(
-        @Param('codigo') codigo: string
+        @Param('code') code: string
     ) {
         this.client.send('delete-course', {
-            message: { codigo: Number(codigo) }
+            message: { codigo: Number(code) }
         })
     }
 
     @Post('add/student')
     addStudentCourse(@Body() data: ICreateStudentCourse) {
+        console.log(data)
         this.client.send('create-student-course', {
             message: data
-        })
+        }).subscribe()
     }
 
-    @Get(':codigo_curso/list/student')
+    @Get(':code_course/list/student')
     listStudentCourse(
-        @Param('codigo_curso') codigo_curso: number,
-        @Query('nome') nome: string
+        @Param('code_course') code_course: number,
+        @Query('name') name: string
     ): Observable<StudentCourse[]> {
+        console.log(code_course, name)
         return this.client.send<StudentCourse[]>('list-student-course', {
             message: {
-                codigo_curso,
-                nome
+                code_course,
+                name
             }
         })
     }

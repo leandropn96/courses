@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IStudentRepository } from "../../contracts/repositories/ICourseRepository";
-import { Aluno } from "../../infra/typeorm/entities/Aluno";
+import { Student } from "../../infra/typeorm/entities/Student";
 
 @Injectable()
 export class ListStudentsUseCases {
@@ -8,7 +8,7 @@ export class ListStudentsUseCases {
         @Inject('StudentRepository')
         private studentRepository: IStudentRepository,
     ) { }
-    public async execute(): Promise<Aluno[]> {
+    public async execute(): Promise<Student[]> {
         const aluno = await this.studentRepository.list()
         return aluno
     }

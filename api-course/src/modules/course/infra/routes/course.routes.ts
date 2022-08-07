@@ -24,9 +24,8 @@ export class CourseController {
 
     @MessagePattern('create-course')
     public async createCourse(@Payload('message') message: ICreateCourseDTO) {
-        console.log(message, "teste")
-        const cursos = await this.createCoursesUseCases.execute(message)
-        return cursos
+        const courses = await this.createCoursesUseCases.execute(message)
+        return courses
     }
 
     @MessagePattern('list-course')
@@ -36,34 +35,31 @@ export class CourseController {
 
     @MessagePattern('show-course')
     public async showCourse() {
-        const cursos = await this.listCoursesUseCases.execute()
-        return cursos
+        const courses = await this.listCoursesUseCases.execute()
+        return courses
     }
 
     @MessagePattern('update-course')
     public async updateCourse(@Payload('message') message: IUpdateCourseDTO) {
-        console.log(message, "teste")
-        const cursos = await this.updateCourseUseCase.execute(message)
-        return cursos
+        const courses = await this.updateCourseUseCase.execute(message)
+        return courses
     }
 
     @MessagePattern('delete-course')
     public async deleteCourse(@Payload('message') message: number) {
-        console.log(message)
-        const cursos = await this.deleteCourseUseCase.execute(message)
-        return cursos
+        const courses = await this.deleteCourseUseCase.execute(message)
+        return courses
     }
 
     @MessagePattern('create-student-course')
     public async addStudentCourse(@Payload('message') message: ICreateStudentCourseDTO) {
-        console.log(message)
-        const cursos = await this.addStudentCoursesUseCases.execute(message)
-        return cursos
+        const courses = await this.addStudentCoursesUseCases.execute(message)
+        return courses
     }
 
     @MessagePattern('list-student-course')
-    public async addSutdentCourse(@Payload('message') { codigo_curso, nome }: IListStudentCourseDTO) {
-        const cursos = await this.listStudentCoursesUseCases.execute(codigo_curso, nome)
-        return cursos
+    public async addSutdentCourse(@Payload('message') { code_course, name }: IListStudentCourseDTO) {
+        const courses = await this.listStudentCoursesUseCases.execute(code_course, name)
+        return courses
     }
 }

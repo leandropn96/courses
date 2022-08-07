@@ -11,10 +11,10 @@ export class StudentsController {
         transport: Transport.KAFKA,
         options: {
             client: {
-                brokers: ['localhost:9093']
+                brokers: ['localhost:9093'],
             },
             consumer: {
-                groupId: 'course'
+                groupId: 'students'
             },
             producer: {
                 createPartitioner: Partitioners.LegacyPartitioner
@@ -24,7 +24,6 @@ export class StudentsController {
     client: ClientKafka
 
     async onModuleInit() {
-        console.log("chamou sim")
         Object.values(topics).forEach((microService) => {
             this.client.subscribeToResponseOf(microService);
         });
@@ -35,7 +34,7 @@ export class StudentsController {
     createCurse(@Body() data: ICreateStudentDTO) {
         this.client.send('create-student', {
             message: data
-        })
+        }).subscribe()
     }
 
     @Get()
@@ -45,30 +44,31 @@ export class StudentsController {
         })
     }
 
-    @Get(':codigo')
-    show(@Param('codigo') codigo: string) {
-        const curso = this.client.send('show-student', {
-            message: Number(codigo)
+    @Get(':code')
+    show(@Param('code') code: string) {
+        const course = this.client.send('show-student', {
+            message: Number(code)
         })
-        return curso
+        return course
     }
 
-    @Put(':codigo')
+    @Put(':code')
     update(
-        @Param('codigo') codigo: string,
+        @Param('code') code: string,
         @Body() data: ICreateStudentDTO
     ) {
+        console.log(data, code)
         this.client.send('update-student', {
-            message: { ...data, codigo: Number(codigo) }
-        })
+            message: { ...data, code: Number(code) }
+        }).subscribe()
     }
 
-    @Delete(':codigo')
+    @Delete(':code')
     delete(
-        @Param('codigo') codigo: string
+        @Param('code') code: string
     ) {
         this.client.send('delete-student', {
-            message: { codigo: Number(codigo) }
+            message: { code: Number(code) }
         })
     }
 }

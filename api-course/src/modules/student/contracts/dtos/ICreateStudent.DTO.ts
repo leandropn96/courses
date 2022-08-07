@@ -1,3 +1,3 @@
 export class ICreateStudentDTO {
-    nome: string
+    name: string
 }

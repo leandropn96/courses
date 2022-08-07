@@ -1,5 +1,5 @@
 export class Course {
-    codigo: string
-    descricao: string
-    ementa: string
+    code: string
+    description: string
+    menu: string
 }

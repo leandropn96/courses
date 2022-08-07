@@ -5,9 +5,9 @@ import { IUpdateCourseDTO } from "../dtos/IUpdateCourse.DTO";
 interface ICourseRepository {
     create(data: ICreateCourseDTO): Promise<Course>
     list(): Promise<Course[]>
-    show(codigo: number): Promise<Course>
+    show(code: number): Promise<Course>
     update(data: IUpdateCourseDTO): Promise<boolean>
-    delete(codigo: number): Promise<boolean>
+    delete(code: number): Promise<boolean>
 }
 
 export { ICourseRepository };

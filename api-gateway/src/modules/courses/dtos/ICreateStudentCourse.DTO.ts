@@ -1,4 +1,4 @@
 export class ICreateStudentCourse {
-    codigo_curso: string
-    codigo_aluno: string
+    code_student: number
+    code_course: number
 }

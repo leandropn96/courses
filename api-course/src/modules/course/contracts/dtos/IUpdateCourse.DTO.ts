@@ -1,5 +1,5 @@
 export class IUpdateCourseDTO {
-    codigo: number
-    descricao: string
-    ementa: string
+    code: number
+    description: string
+    menu: string
 }

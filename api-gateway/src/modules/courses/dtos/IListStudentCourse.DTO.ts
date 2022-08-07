@@ -1,14 +1,14 @@
 export class StudentCourse {
-    codigo: number
-    codigo_aluno: number
-    codigo_curso: number
-    aluno: {
-        codigo: number,
-        nome: string
+    code: number
+    code_student: number
+    coude_course: number
+    student: {
+        code: number,
+        name: string
     }
     course: {
-        codigo: number,
-        descricao: string,
-        ementa: string
+        code: number,
+        description: string,
+        menu: string
     }
 }

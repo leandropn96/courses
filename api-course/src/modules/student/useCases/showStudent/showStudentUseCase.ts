@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IStudentRepository } from "../../contracts/repositories/ICourseRepository";
-import { Aluno } from "../../infra/typeorm/entities/Aluno";
+import { Student } from "../../infra/typeorm/entities/Student";
 
 @Injectable()
 export class ShowStudentUseCase {
@@ -8,7 +8,7 @@ export class ShowStudentUseCase {
         @Inject('StudentRepository')
         private studentRepository: IStudentRepository,
     ) { }
-    public async execute(codigo: number): Promise<Aluno> {
-        return this.studentRepository.show(codigo)
+    public async execute(code: number): Promise<Student> {
+        return this.studentRepository.show(code)
     }
 }

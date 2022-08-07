@@ -25,11 +25,11 @@ export class StudentHttpService {
 
   }
 
-  update({ codigo, nome }: Student): Observable<boolean> {
-    return this.http.put<boolean>(`http://localhost:3000/students/${codigo}`, { nome });
+  update({ code, name }: Student) {
+    this.http.put<boolean>(`http://localhost:3000/students/${code}`, { name }).subscribe();
   }
 
-  delete(codigo: number): Observable<boolean> {
-    return this.http.delete<boolean>(`http://localhost:3000/students/${codigo}`);
+  delete(code: number): Observable<boolean> {
+    return this.http.delete<boolean>(`http://localhost:3000/students/${code}`);
   }
 }

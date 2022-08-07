@@ -9,7 +9,6 @@ export class UpdateCourseUseCase {
         private courseRepository: ICourseRepository,
     ) { }
     public async execute(data: IUpdateCourseDTO): Promise<boolean> {
-        console.log(data)
         return this.courseRepository.update(data)
     }
 }

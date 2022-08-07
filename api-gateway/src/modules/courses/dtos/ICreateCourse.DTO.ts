@@ -1,4 +1,4 @@
 export class ICreateCourse {
-    descricao: string
-    ementa: string
+    description: string
+    menu: string
 }

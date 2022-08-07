@@ -1,9 +1,9 @@
 export class ICreateStudentCourseDTO {
-    codigo_aluno: number
-    codigo_curso: number
+    code_student: number
+    code_course: number
 }
 
 export class IListStudentCourseDTO {
-    codigo_curso: number
-    nome: string
+    code_course: number
+    name: string
 }

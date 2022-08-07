@@ -2,11 +2,11 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { StudentRepository } from "../infra/typeorm/repositories/StudentRepository";
 
-import { Aluno } from "../infra/typeorm/entities/Aluno";
+import { Student } from "../infra/typeorm/entities/Student";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Aluno]),
+    TypeOrmModule.forFeature([Student]),
   ],
   providers: [
     {

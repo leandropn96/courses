@@ -7,8 +7,8 @@ export class DeleteCourseUseCase {
         @Inject('CourseRepository')
         private courseRepository: ICourseRepository,
     ) { }
-    public async execute(codigo: number): Promise<boolean> {
+    public async execute(code: number): Promise<boolean> {
 
-        return this.courseRepository.delete(codigo)
+        return this.courseRepository.delete(code)
     }
 }

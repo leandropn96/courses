@@ -8,7 +8,7 @@ export class ShowCourseUseCase {
         @Inject('CourseRepository')
         private courseRepository: ICourseRepository,
     ) { }
-    public async execute(codigo: number): Promise<Course> {
-        return this.courseRepository.show(codigo)
+    public async execute(code: number): Promise<Course> {
+        return this.courseRepository.show(code)
     }
 }

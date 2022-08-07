@@ -1,0 +1,17 @@
+<div>
+    <div id="actions">
+        <mat-icon mat-button mat-dialog-close id="close">close</mat-icon>
+    </div>
+    <h1 mat-dialog-title>{{params.type_modal === 'add' ? 'Cadastrar': 'Editar'}} alunos</h1>
+    <div id="content">
+        <form action="">
+            <label for="">Selecione um aluno</label>
+            <select id="evento" name="evento" class="form-control" [(ngModel)]="code_student">
+                <option *ngFor="let evento of studentHttpService.students" [value]="evento.code">{{evento.name}}
+                </option>
+            </select>
+            <button *ngIf="params.type_modal === 'add'" mat-dialog-close
+                (click)="saveStudentCourse()">Cadastrar</button>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
+
 export const postgres: TypeOrmModuleOptions = {
     name: 'postgres',
     type: 'postgres',
@@ -8,7 +9,7 @@ export const postgres: TypeOrmModuleOptions = {
     host: 'localhost',
     username: 'postgres',
     password: 'password',
-    database: 'course',
+    database: 'courses',
     entities: [path.resolve(
         __dirname,
         '..',
@@ -23,6 +24,6 @@ export const postgres: TypeOrmModuleOptions = {
     ),
     ],
     synchronize: false,
-    // migrations: [path.resolve(__dirname, 'migrations', '*')],
+    migrations: [path.resolve(__dirname, 'migrations', '*')],
     logging: ['error', 'warn']
 };

@@ -4,7 +4,7 @@ import { CourseRepository } from "../infra/typeorm/repositories/CourseRepository
 import { StudentCourseRepository } from "../infra/typeorm/repositories/StudentCourseRepository"
 
 import { Course } from "../infra/typeorm/entities/Course";
-import { StudentsCourse } from "../infra/typeorm/entities/CursoAluno";
+import { StudentsCourse } from "../infra/typeorm/entities/CourseStudents";
 
 @Module({
   imports: [

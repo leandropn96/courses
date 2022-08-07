@@ -1,33 +1,33 @@
 export interface Course {
-    codigo: number,
-    descricao: string,
-    ementa: string,
+    code: number,
+    description: string,
+    menu: string,
 }
 
 export interface CreateCourse {
-    codigo?: number,
-    descricao: string,
-    ementa: string,
+    code?: number,
+    description: string,
+    menu: string,
 }
 
 export interface Student {
-    codigo: number,
-    nome: string,
+    code: number,
+    name: string,
 }
 
 export interface CreateStudent {
-    codigo?: number,
-    nome: string,
+    code?: number,
+    name: string,
 }
 
 export interface CreateStudentCourse {
-    codigo_curso: number,
-    codigo_aluno: number,
+    code_course: number,
+    code_student: number,
 }
 
 export interface ListStudentCourse {
-    codigo_curso: number,
-    codigo_aluno: string,
-    aluno: Student,
+    code_course: number,
+    code_student: string,
+    student: Student,
     course: Course,
 }
