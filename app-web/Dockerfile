@@ -1,9 +1,10 @@
-FROM node:16.14.0
-
+FROM node:alpine AS my-app-build
 WORKDIR /app
-COPY package*.json ./
-RUN yarn install
 COPY . .
+RUN npm ci && npm run build
 
-EXPOSE 4200
-CMD ["ng", "serve"]
+# stage 2
+
+FROM nginx:alpine
+COPY --from=my-app-build /app/dist/web-course /usr/share/nginx/html
+EXPOSE 80

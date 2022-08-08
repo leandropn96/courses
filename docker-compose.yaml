@@ -10,6 +10,8 @@ services:
       - 'zookeeper_data:/bitnami'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - fila-network
 
   kafka:
     image: 'docker.io/bitnami/kafka:2-debian-10'
@@ -31,38 +33,76 @@ services:
       - KAFKA_CREATE_TOPICS=false
     depends_on:
       - zookeeper
-  # postgres:
-  #   container_name: postgresDB
-  #   image: postgres
-  #   restart: always
-  #   environment:
-  #     POSTGRES_PASSWORD: "password"
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - ~/PostgreSQLDB:/var/lib/postgresql/data
-  #   networks:
-  #     - postgres-network
-  # api-gateway:
-  #   build:
-  #     context: ./api-gateway
-  #   image: course/api-gateway
-  #   restart: always
+    networks:
+      - fila-network
 
-  # api-course:
-  #   build:
-  #     context: ./api-course
-  #   image: course/api-course
-  #   restart: always
+  postgresDB:
+    container_name: postgresDB
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: courses
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    volumes:
+      - ~/PostgreSQLDB:/var/lib/postgresql/data
+    networks:
+      - postgres-network
 
-  # app-web:
-  #   build:
-  #     context: ./app-web
-  #   image: course/api-web
-  #   restart: always
+  api-gateway:
+    build:
+      context: ./api-gateway
+    image: course/api-gateway
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - fila-network
+
+  api-course:
+    build:
+      context: ./api-course
+    image: course/api-course
+    restart: always
+    networks:
+      - fila-network
+      - postgres-network
+    depends_on:
+      - postgresDB
+
+  migrations:
+    build:
+      context: ./api-course
+    image: course/api-migration
+    restart: always
+    networks:
+      - fila-network
+      - postgres-network
+    depends_on:
+      - postgresDB
+    command: [ "yarn", "typeorm:run" ]
+
+  app-web:
+    build:
+      context: ./app-web
+    image: course/app-web
+    restart: always
+    ports:
+      - "4200:80"
 
 volumes:
   zookeeper_data:
     driver: local
   kafka_data:
     driver: local
+networks:
+  postgres-network:
+    name: postgres-network
+    driver: bridge
+  fila-network:
+    name: fila-network
+    driver: bridge

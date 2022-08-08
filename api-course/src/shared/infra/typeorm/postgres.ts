@@ -6,7 +6,7 @@ export const postgres: TypeOrmModuleOptions = {
     name: 'postgres',
     type: 'postgres',
     port: 5432,
-    host: 'localhost',
+    host: 'postgresDB',
     username: 'postgres',
     password: 'password',
     database: 'courses',

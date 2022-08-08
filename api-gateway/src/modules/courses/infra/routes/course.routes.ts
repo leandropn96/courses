@@ -15,7 +15,7 @@ export class CourseController {
         transport: Transport.KAFKA,
         options: {
             client: {
-                brokers: ['localhost:9093']
+                brokers: ['kafka:9092']
             },
             consumer: {
                 groupId: 'courses'

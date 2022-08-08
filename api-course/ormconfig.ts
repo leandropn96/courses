@@ -4,7 +4,7 @@ import { DataSource } from "typeorm";
 
 const config = new DataSource({
     type: 'postgres',
-    host: 'localhost',
+    host: 'postgresDB',
     port: 5432,
     username: 'postgres',
     password: 'password',
@@ -16,7 +16,7 @@ const config = new DataSource({
             'infra',
             'typeorm',
             'migrations')],
-    synchronize: false,
+    synchronize: true,
     migrationsRun: true,
     logging: true,
     logger: 'file',
