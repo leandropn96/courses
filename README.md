@@ -13,6 +13,9 @@ docker compose up -d && docker stop courses-migrations-1  && docker rm courses-m
 ## API
 - BASE_URL: http://localhost:3000
 
+## WEB
+- BASE_URL: http://localhost:4200
+
 ## DESCRIPTION API ENDPOINTS
 
 ## AUTHOR
