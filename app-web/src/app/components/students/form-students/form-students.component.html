@@ -1,0 +1,14 @@
+<div>
+    <div id="actions">
+        <mat-icon mat-button mat-dialog-close id="close">close</mat-icon>
+    </div>
+    <h1 mat-dialog-title>{{params.type_modal === 'add' ? 'Cadastrar': 'Editar'}} aluno</h1>
+    <div id="content">
+        <form action="">
+            <label for="titulo">Nome</label>
+            <input type="text" [(ngModel)]="name" name="name">
+            <button *ngIf="params.type_modal === 'add'" mat-dialog-close (click)="saveStudent()">Cadastrar</button>
+            <button *ngIf="params.type_modal === 'edit'" mat-dialog-close (click)="editStudent()">Editar</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    margin: 0;
+}
+
+.col-1 {
+    flex: 1;
+}
+
+.col-2 {
+    display: flex;
+    flex-direction: column;
+    flex: 6;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.content>article {
+    flex: 5;
+    height: 85vh;
+}
+
+header {
+    height: 15vh;
+}
+
+header,
+footer,
+article,
+nav {
+    padding: 1em;
+}

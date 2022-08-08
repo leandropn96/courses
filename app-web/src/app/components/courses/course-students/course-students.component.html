@@ -1,0 +1,19 @@
+<section>
+    <div id="actions">
+        <button mat-stroked-button (click)="openDialog()">
+            Matricular aluno<mat-icon>add</mat-icon>
+        </button>
+        <input placeholder="Buscar aluno" type="text" name="titulo">
+    </div>
+    <div id="student-container">
+        <div id="course_box" *ngFor="let student of courseStudentHTTP.course_students">
+            <div id="photograph"><img width="100%"
+                    src="https://www.ufpb.br/cdn/contents/imagens/icones/aluno.png/@@images/image.png" alt=""></div>
+            <div id="student">
+                <p>
+                    {{student.student.name}}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
